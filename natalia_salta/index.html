@@ -13,8 +13,8 @@
 }
 /* codigo portada*/
 .container{
-    width: 920px;
-    height: 280px;
+    width: 90%;
+    height: 350px;
     margin: 0 auto;
     
     position: relative;
@@ -55,8 +55,8 @@ body{
 }
 
 .contenedor {
-    width: 920px;
-    height: 280px;
+    width: 90%;
+    height: 350px;
     margin: 0 auto;
     
     position: relative;
@@ -186,6 +186,7 @@ body{
     </style>
 </head>
 <body>
+
     <div class="container">
         <div class="pantalla">
             <div class="inicio">
@@ -198,6 +199,9 @@ body{
 
 
     <div class="contenedor" style="display: none;">
+        <div class="salir">
+            <i id="salir_inicio" style="margin-top:20px;margin-left:5px;color:#c8676d;cursor:pointer;" class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal fa-2xl"></i>
+        </div>
 
         <div class="suelo"></div>
         
@@ -207,7 +211,7 @@ body{
 
     </div>
 
-    <div class="game-over">GAME OVER</div>
+    <div class="game-over">PRESIONA <img style="width:50px;position:relative;top:5px;" src="img/boton-enter-png.png"> PARA REINICIAR</div>
     
 
 <script>
@@ -215,6 +219,7 @@ body{
 //****** GAME LOOP ********//
 
 var time = new Date();
+
 var deltaTime = 0;
 
 if(document.readyState === "complete" || document.readyState === "interactive"){
@@ -228,9 +233,9 @@ function Init() {
     Start();
     Loop();
 }
-
+                                      
 function Loop() {
-    deltaTime = (new Date() - time) / 1000;
+    deltaTime = (new Date() - time) / 1000; 
     time = new Date();
     Update();
     requestAnimationFrame(Loop);
@@ -242,14 +247,22 @@ document.addEventListener("DOMContentLoaded", function() {
     var playButton = document.getElementById("playButton");
     var contenedor = document.querySelector(".contenedor");
     var container = document.querySelector(".container");
+    var salir_inicio = document.getElementById("salir_inicio");
 
     playButton.addEventListener("click", function() {
-        container.style.display = "none"; // Ocultar la pantalla de inicio
-        contenedor.style.display = "block"; // Mostrar el contenedor del juego
-
-        // Iniciar el juego
+        container.style.display = "none"; 
+        contenedor.style.display = "block"; 
         Init();
+        ReiniciarJuego()
     });
+
+    salir_inicio.addEventListener("click",function(){
+        contenedor.style.display = "none";
+        container.style.display = "block"; 
+       
+        ReiniciarJuego()
+    });
+
 });
 
 
@@ -502,5 +515,6 @@ function IsCollision(a, b, paddingTop, paddingRight, paddingBottom, paddingLeft)
 
 
 </script>
+<script src="https://kit.fontawesome.com/59c1bdd5c7.js" crossorigin="anonymous"></script>
 </body>
 </html>
